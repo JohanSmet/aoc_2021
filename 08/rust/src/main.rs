@@ -1,4 +1,8 @@
-use std::vec;
+// I kind of force this one out while also doing other things and it shows.
+// A more elegant approach would have been to convert everything to a bit-pattern;
+// that would take care of ordering issues without explicit sorting and simple bitwise operations
+// be used instead of string searches (contains).
+
 use std::iter::FromIterator;
 
 struct Data {
