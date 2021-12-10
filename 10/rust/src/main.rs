@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-fn solve(chunks: &Vec<&str>) {
+fn solve(chunks: &[&str]) {
 
     let delimiters = HashMap::from([
         ('(', ')'),
@@ -57,7 +57,7 @@ fn solve(chunks: &Vec<&str>) {
         }
     }
 
-    completion_score.sort();
+    completion_score.sort_unstable();
 
     println!("Part 1: score = {}", error_score);
     println!("Part 2: score = {}", completion_score[completion_score.len() / 2]);
