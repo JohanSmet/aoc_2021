@@ -29,7 +29,7 @@ impl Board {
             }
         }
 
-        return false;
+        false
     }
 
     fn sum_of_unmarked(&self) -> i32 {
@@ -42,7 +42,7 @@ impl Board {
             }
         }
 
-        return result;
+        result
     }
 }
 
@@ -115,13 +115,13 @@ fn main() {
 
         let mut numbers : [[i32; 5]; 5] = [[0; 5]; 5];
 
-        for r in 0..5 {
+        for item in &mut numbers {
             for (i, num) in input_iter.next()
                                 .expect("Input incomplete")
                                 .split_ascii_whitespace()
                                 .map(|x| x.parse::<i32>().unwrap_or(0))
                                 .enumerate() {
-                numbers[r][i] = num;
+                item[i] = num;
             }
         }
 

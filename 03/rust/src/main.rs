@@ -4,10 +4,8 @@ fn part1(values: &[&str]) {
 
     // count values per bit
     for value in values {
-        let mut i = 0;
-        for c in value.chars() {
+        for (i, c) in value.chars().enumerate() {
             bit_counts[i] += if c == '1' {1} else {0};
-            i += 1;
         }
     }
 

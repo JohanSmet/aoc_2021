@@ -19,7 +19,7 @@ impl Data {
     }
 }
 
-fn part1(data : &Vec<Data>) {
+fn part1(data : &[Data]) {
     let mut count = 0;
 
     for d in data {
@@ -34,20 +34,15 @@ fn part1(data : &Vec<Data>) {
     println!("Part 1: {}", count);
 }
 
-fn part2(data: &Vec<Data>) {
+fn part2(data: &[Data]) {
 
     let mut result: usize = 0;
 
     for d in data {
         let mut digits_to_pattern : [&str; 10] = [""; 10];
 
-        let decode_digit = |digits: &[&str], pattern : &str| -> usize {
-            for digit in 0..10 {
-                if pattern == digits[digit] {
-                    return digit;
-                }
-            }
-            panic!("Bad Input");
+        let decode_digit = |digits: &[&str; 10], pattern : &str| -> usize {
+            digits.iter().position(|&dp| dp == pattern).expect("Bad input data")
         };
 
         let mut top_right : char = ' ';
@@ -137,7 +132,7 @@ fn main() {
             .lines()
             .map(|l| { Data { data : l.split_whitespace().map(|x| {
                     let mut buffer : Vec<char> = x.chars().collect();
-                    buffer.sort();
+                    buffer.sort_unstable();
                     String::from_iter(buffer)
                 }).collect() } })
             .collect();

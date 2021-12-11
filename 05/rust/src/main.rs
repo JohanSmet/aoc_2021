@@ -7,10 +7,11 @@ struct Line {
 
 impl Line {
     fn is_axis_aligned(&self) -> bool {
-        return self.x1 == self.x2 || self.y1 == self.y2;
+        self.x1 == self.x2 || self.y1 == self.y2
     }
 
     fn delta(&self) -> [i32; 2] {
+        #[allow(clippy::comparison_chain)]
         [   if self.x1 < self.x2 {1} else if self.x1 > self.x2 {-1} else {0},
             if self.y1 < self.y2 {1} else if self.y1 > self.y2 {-1} else {0} ]
     }

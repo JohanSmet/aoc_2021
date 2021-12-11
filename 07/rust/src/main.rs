@@ -1,4 +1,4 @@
-fn solve<F>(positions: &Vec<i32>, fuel_func : F) -> (i32, i32)
+fn solve<F>(positions: &[i32], fuel_func : F) -> (i32, i32)
         where F: Fn(i32) -> i32 {
     // hmm, not the cleanest or most efficient approach but it runs fast enough ...
     let min_pos = positions[0];
@@ -18,15 +18,15 @@ fn solve<F>(positions: &Vec<i32>, fuel_func : F) -> (i32, i32)
         }
     }
 
-    return (best_pos, best_dist)
+    (best_pos, best_dist)
 }
 
-fn part1(positions: &Vec<i32>) {
+fn part1(positions: &[i32]) {
     let (pos, fuel) = solve(positions, |pos: i32| positions.iter().fold(0, |sum, x| sum + (x - pos).abs()));
     println!("Part 1: best position = {} with used fuel = {}", pos, fuel);
 }
 
-fn part2(positions: &Vec<i32>) {
+fn part2(positions: &[i32]) {
 
     // pre-compute the fuel costs
     let mut fuel_costs = vec!(0);
@@ -48,7 +48,7 @@ fn main() {
     let mut positions : Vec<i32> = input_data.split(',')
         .map(|x| x.parse::<i32>().unwrap())
         .collect();
-    positions.sort();
+    positions.sort_unstable();
 
     // solve the problems
     part1(&positions);
