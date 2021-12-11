@@ -1,26 +1,26 @@
-fn cell_value(grid: &Vec<Vec<i32>>, x: i32, y: i32) -> i32 {
+fn cell_value(grid: &[Vec<i32>], x: i32, y: i32) -> i32 {
     if x < 0 || y < 0 || y as usize >= grid.len() || x as usize >= grid[0].len() {
         return 10;
     }
 
-    return grid[y as usize][x as usize];
+    grid[y as usize][x as usize]
 }
 
-fn cell_is_lowpoint(grid: &Vec<Vec<i32>>, x: i32, y: i32) -> bool {
+fn cell_is_lowpoint(grid: &[Vec<i32>], x: i32, y: i32) -> bool {
     let value = cell_value(grid, x, y);
 
     let mut is_low = cell_value(grid, x - 1, y) > value;
     is_low = is_low && cell_value(grid, x + 1, y) > value;
     is_low = is_low && cell_value(grid, x, y - 1) > value;
     is_low = is_low && cell_value(grid, x, y + 1) > value;
-    return is_low;
+    is_low
 }
 
-fn cell_is_flooded(grid: &Vec<Vec<bool>>, x: i32, y: i32) -> bool {
+fn cell_is_flooded(grid: &[Vec<bool>], x: i32, y: i32) -> bool {
     grid[y as usize][x as usize]
 }
 
-fn flood_fill(grid: &Vec<Vec<i32>>, flooded: &mut Vec<Vec<bool>>, x: i32, y: i32) -> i32 {
+fn flood_fill(grid: &[Vec<i32>], flooded: &mut Vec<Vec<bool>>, x: i32, y: i32) -> i32 {
 // straight-forward recursive floodfill. Should be plenty fast for a 1000x1000 grid.
 
     if cell_value(grid, x, y) == 9 {
@@ -47,10 +47,10 @@ fn flood_fill(grid: &Vec<Vec<i32>>, flooded: &mut Vec<Vec<bool>>, x: i32, y: i32
     }
 
 
-    return count;
+    count
 }
 
-fn part1(grid: &Vec<Vec<i32>>) {
+fn part1(grid: &[Vec<i32>]) {
 
     let mut low_points = vec![];
 
@@ -65,7 +65,7 @@ fn part1(grid: &Vec<Vec<i32>>) {
     println!("Part 1: risk level = {}", low_points.iter().sum::<i32>());
 }
 
-fn part2(grid: &Vec<Vec<i32>>) {
+fn part2(grid: &[Vec<i32>]) {
 
     let mut flooded: Vec<Vec<bool>> = vec![vec![false; grid[0].len()]; grid.len()];
     let mut basins: Vec<i32> = vec![];
@@ -79,7 +79,7 @@ fn part2(grid: &Vec<Vec<i32>>) {
         }
     }
 
-    basins.sort();
+    basins.sort_unstable();
     println!("Part 2: result = {}", basins.iter().rev().take(3).product::<i32>());
 }
 
